@@ -8,5 +8,6 @@ class CreateBookings < ActiveRecord::Migration[8.1]
 
       t.timestamps
     end
+    add_index :bookings, [:lesson_id,:student_id], unique:true
   end
 end
