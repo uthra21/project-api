@@ -1,0 +1,17 @@
+services:
+  web:
+    build: .
+    container_name: rails_web
+    command: bin/rails server -b 0.0.0.0
+    volumes:
+      - .:/usr/src/app
+      - bundle:/usr/local/bundle
+    ports:
+      - "3000:3000"
+    environment:
+      RAILS_ENV: development
+    stdin_open: true
+    tty: true
+
+volumes:
+  bundle:
