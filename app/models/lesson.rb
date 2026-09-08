@@ -2,8 +2,8 @@ class Lesson < ApplicationRecord
   include Sluggable
   belongs_to :studio
   belongs_to :instructor, optional:true
-  validate :slug, uniqueness:{scope: :studio_id}
-  validate :code, uniqueness:{scope: :studio_id}
+  validates :slug, uniqueness:{scope: :studio_id}
+  validates :code, uniqueness:{scope: :studio_id}
   has_many :bookings
   has_many :students, through: :bookings
   after_create :generate_code

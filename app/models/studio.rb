@@ -3,5 +3,5 @@ class Studio < ApplicationRecord
     has_many :lessons
     has_many :students
     has_many :instructors
-    validate :slug, unique:true
+    validates :slug, unique:true
 end

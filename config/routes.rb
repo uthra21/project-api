@@ -20,6 +20,7 @@ Rails.application.routes.draw do
         member do
           get 'lessons'
         end
+      end
     end
   end
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
