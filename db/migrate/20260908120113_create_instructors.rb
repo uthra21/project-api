@@ -7,5 +7,6 @@ class CreateInstructors < ActiveRecord::Migration[8.1]
 
       t.timestamps
     end
+    add_index :instructors, [:email,:studio_id], unique:true
   end
 end

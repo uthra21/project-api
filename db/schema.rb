@@ -12,10 +12,10 @@
 
 ActiveRecord::Schema[8.1].define(version: 2026_09_08_125232) do
   create_table "bookings", force: :cascade do |t|
-    t.time "booking_time"
+    t.datetime "booking_time"
     t.datetime "created_at", null: false
     t.integer "lesson_id", null: false
-    t.string "status"
+    t.string "status", default: "attended"
     t.integer "student_id", null: false
     t.datetime "updated_at", null: false
     t.index ["lesson_id", "student_id"], name: "index_bookings_on_lesson_id_and_student_id", unique: true
@@ -24,11 +24,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_08_125232) do
   end
 
   create_table "cancellation_policies", force: :cascade do |t|
-    t.integer "cancellation_time"
+    t.integer "cancellation_time", default: 24
     t.datetime "created_at", null: false
-    t.decimal "refund_percentage"
+    t.decimal "refund_percentage", precision: 5, scale: 2, default: "100.0"
     t.integer "studio_id", null: false
     t.datetime "updated_at", null: false
+    t.index ["id", "studio_id"], name: "index_cancellation_policies_on_id_and_studio_id", unique: true
     t.index ["studio_id"], name: "index_cancellation_policies_on_studio_id"
   end
 
@@ -38,6 +39,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_08_125232) do
     t.string "name"
     t.integer "studio_id", null: false
     t.datetime "updated_at", null: false
+    t.index ["email", "studio_id"], name: "index_instructors_on_email_and_studio_id", unique: true
     t.index ["studio_id"], name: "index_instructors_on_studio_id"
   end
 
@@ -49,8 +51,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_08_125232) do
     t.integer "instructor_id"
     t.string "name"
     t.string "slug"
-    t.time "start_time"
-    t.string "status"
+    t.datetime "start_time"
+    t.string "status",default: "available"
     t.integer "studio_id", null: false
     t.datetime "updated_at", null: false
     t.index ["instructor_id"], name: "index_lessons_on_instructor_id"
@@ -65,6 +67,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_08_125232) do
     t.string "name"
     t.integer "studio_id", null: false
     t.datetime "updated_at", null: false
+    t.index ["email", "studio_id"], name: "index_students_on_email_and_studio_id", unique: true
     t.index ["studio_id"], name: "index_students_on_studio_id"
   end
 

@@ -4,14 +4,20 @@ class Booking < ApplicationRecord
   before_save :time_of_booking
   validates :student_id, uniqueness:{scope: :lesson_id}
   validates :status, inclusion: {in:["attended","no-show","cancelled"]}
-  before_create :validate_capacity
-  scope :cancelled, -> {where(status:"cancelled")}
+  validate :belongs_to_the_same_studio
+  validate :validate_capacity, on: :create
   def time_of_booking
-    update_column(:booking_time,Time.now)
+    self.booking_time = Time.now
   end
-  # def validate_capacity
-  #   if (lesson.capacity - (self.last.id - count(self.cancelled))) == 0
-  #     errors.add("Lesson fully booked, try again next time or try other lessons")
-  #   end
-  # end
+  def validate_capacity
+    live_bookings = lesson.bookings.where.not(status:"cancelled").count
+    if live_bookings >= lesson.capacity
+      errors.add(:lesson,"is fully booked")
+    end
+  end
+  def belongs_to_the_same_studio
+    unless lesson.studio_id == student.studio_id
+      errors.add(:studio,"should be the same for both the lessons and the studios")
+    end
+  end
 end

@@ -6,5 +6,6 @@ class CreateStudents < ActiveRecord::Migration[8.1]
       t.references :studio, null:false, foreign_key:true
       t.timestamps
     end
+    add_index :students, [:email,:studio_id], unique:true
   end
 end

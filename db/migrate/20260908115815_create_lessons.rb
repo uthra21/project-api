@@ -2,12 +2,12 @@ class CreateLessons < ActiveRecord::Migration[8.1]
   def change
     create_table :lessons do |t|
       t.string :name
-      t.time :start_time
+      t.datetime :start_time
       t.integer :capacity
-      t.string :status
+      t.string :status, default: "available"
       t.string :code
       t.string :slug
-      t.time :cancelled_at
+      t.time :cancelled_at, default: nil
       t.references :studio, null: false, foreign_key: true
       t.references :instructor, foreign_key:true
       t.timestamps
