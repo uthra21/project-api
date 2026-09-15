@@ -5,6 +5,6 @@ class ApplicationController < ActionController::Base
   # Changes to the importmap will invalidate the etag for HTML responses
   stale_when_importmap_changes
   def health
-    render json: "ok", status: :ok
+    render json: {status: "ok"}, status: :ok
   end
 end

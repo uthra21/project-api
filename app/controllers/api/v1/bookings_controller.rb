@@ -1,13 +1,13 @@
 class Api::V1::BookingsController < Api::V1::BaseController
-    before_action :set_studio
-    before_action :set_lesson
+    before_action :set_studio, only:[:index,:create]
+    before_action :set_lesson, only:[:index,:create]
     def index
         bookings = @lesson.bookings
         render json: bookings, status: :ok
     end
     def create
         bookings_params = params.require(:booking).permit(:student_id)
-        booking = Booking.new(booking_params)
+        booking = Booking.new(bookings_params)
         booking.lesson = @lesson
         if booking.save
             render json: booking, status: :created

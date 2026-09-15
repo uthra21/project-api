@@ -15,9 +15,9 @@ class Lesson < ApplicationRecord
   scope :instructor_id, -> (id) {where(instructor_id:id)}
   scope :unassigned, -> {where(instructor_id:nil)}
   scope :starts_after, -> (time) {where("start_time >= ?",time)}
-  scope :has_space,-> {where("capacity > SELECT COUNT(*) FROM bookings WHERE bookings.lesson_id = lessons.id AND bookings.status != 'cancelled'")}
+  scope :has_space,-> {where("capacity > (SELECT COUNT(*) FROM bookings WHERE bookings.lesson_id = lessons.id AND bookings.status != 'cancelled')")}
   def belongs_to_the_same_studio
-    return unless instructor.nil?
+    return if instructor.nil?
     unless instructor.studio_id == studio_id
       errors.add(:instructor,"must be from the same studio")
     end

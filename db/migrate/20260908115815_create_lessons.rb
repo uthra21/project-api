@@ -4,10 +4,10 @@ class CreateLessons < ActiveRecord::Migration[8.1]
       t.string :name
       t.datetime :start_time
       t.integer :capacity
-      t.string :status, default: "available"
+      t.string :status, default: "available", null:false
       t.string :code
       t.string :slug
-      t.time :cancelled_at, default: nil
+      t.datetime :cancelled_at, default: nil
       t.references :studio, null: false, foreign_key: true
       t.references :instructor, foreign_key:true
       t.timestamps

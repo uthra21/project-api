@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
   get "health", to: 'application#health'
   namespace :api do
-    namespeace :v1 do
+    namespace :v1 do
       resources :studio,only:[], param: :slug do
         resources :lessons, only:[:index,:show,:create,:update] do
           member do

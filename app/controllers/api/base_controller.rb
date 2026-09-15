@@ -13,7 +13,7 @@ class Api::BaseController < ApplicationController
         end
     end
     def handle_not_found
-        render json: {error:"record not found"}, status: :not_founf
+        render json: {error:"record not found"}, status: :not_found
     end
     def handle_missing_parameter
         render json: {error: "Parameter missing/incorrect"}, status: :unprocessable_entity

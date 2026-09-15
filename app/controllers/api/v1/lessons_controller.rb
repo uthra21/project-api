@@ -63,4 +63,8 @@ class Api::V1::LessonsController < Api::V1::BaseController
             render json: {error: @lesson.errors}, status: :unprocessable_entity
         end
     end
+    private
+    def set_lesson
+        @lesson = @studio.lessons.find(params[:id])
+    end
 end
