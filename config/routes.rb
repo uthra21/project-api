@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :studio,only:[], param: :slug do
+        get "reports/:id/download", to: "reports#download"
+        resources :reports, only:[:create]
         resources :lessons, only:[:index,:show,:create,:update] do
           member do
             post 'cancel'

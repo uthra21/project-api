@@ -5,6 +5,9 @@ gem "rails", "~> 8.1.3", ">= 8.1.3.1"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "byebug"
 gem "propshaft"
+gem "sidekiq"
+gem "redis"
+gem "csv"
 # Use sqlite3 as the database for Active Record
 gem "sqlite3", ">= 2.1"
 # Use the Puma web server [https://github.com/puma/puma]

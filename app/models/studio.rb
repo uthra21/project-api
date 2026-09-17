@@ -4,5 +4,6 @@ class Studio < ApplicationRecord
     has_many :lessons
     has_many :students
     has_many :instructors
+    has_many :reports
     validates :slug, uniqueness:true
 end
